@@ -1,3 +1,46 @@
+.product {
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: column;
+}
+
+.featuredProduct {
+    composes: product;
+    border: 1px solid #000000;
+}
+
+.section {
+    padding: 15px;
+}
+
+.recommendationSection {
+    composes: section;
+    height: 20px;
+}
+
+.recommendationText {
+    margin-left: 10px;
+}
+
+.product:first-of-type .recommendationSection,
+.product:first-of-type .overviewSection,
+.product:first-of-type .featuresSection,
+.product:first-of-type .priceSection {
+    padding-left: 0;
+}
+
+.product:last-of-type .recommendationSection,
+.product:last-of-type .overviewSection,
+.product:last-of-type .featuresSection,
+.product:last-of-type .priceSection {
+    padding-right: 0;
+}
+
+.overviewSection {
+    composes: section;
+    height: 200px;
+}
+
 .name {
     font-size: 22px;
     font-weight: 700;
@@ -11,9 +54,11 @@
     font-weight: 400;
 }
 
-.features {
+.featuresSection {
+    composes: section;
     border-bottom: 1px solid #DBDBDB;
     border-top: 1px solid #DBDBDB;
+    height: 280px;
 }
 
 .featureHeader {
@@ -26,7 +71,18 @@
 }
 
 .feature {
+    display: flex;
     margin-bottom: 1rem;
+}
+
+.featureDescription {
+    margin-left: 10px;
+}
+
+.priceSection {
+    composes: section;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .price {
@@ -37,6 +93,9 @@
 .nonSalePrice {
     composes: price;
     color: #c0c0c0;
+    font-size: 18px;
+    font-weight: 700;
+    margin-left: 10px;
     text-decoration: line-through;
 }
 
@@ -46,6 +105,12 @@
     color: #FFFFFF;
     display: block;
     font-size: 16px;
+    height: 50px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    text-align: center;
 }
 
 .confirmCTA {
@@ -63,6 +128,8 @@
 .moneyBackGuarantee {
     composes: label;
     display: block;
+    margin-top: 15px;
+    text-align: center;
 }
 
 .recommendation {
@@ -70,4 +137,12 @@
     background-color: #FEEA52;
     border-radius: 40px;
     font-size: 14px;
+    font-weight: 500;
+    padding: 10px;
+    vertical-align: middle;
+    width: 75%;
+}
+
+.recommendationIcon {
+    vertical-align: middle;
 }

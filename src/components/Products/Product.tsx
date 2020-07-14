@@ -19,8 +19,43 @@ const RecommendationBanner: React.FC<IRecommendationBannerProps> = ({
 }) => {
   return (
     <div className={styles.recommendation}>
-      <img src={Heart} alt={'heart'} />
-      {recommendation}
+      <span className={styles.recommendationIcon}>
+        <img src={Heart} alt={'heart'} />
+      </span>
+      <span className={styles.recommendationText}>{recommendation}</span>
+    </div>
+  )
+}
+
+interface IRecommendationSectionProps {
+  recommendation?: string
+}
+
+const RecommendationSection: React.FC<IRecommendationSectionProps> = ({
+  recommendation,
+}) => {
+  return (
+    <div className={styles.recommendationSection}>
+      {recommendation && (
+        <RecommendationBanner recommendation={recommendation} />
+      )}
+    </div>
+  )
+}
+
+interface IOverviewSectionProps {
+  name: string
+  description: string
+}
+
+const OverviewSection: React.FC<IOverviewSectionProps> = ({
+  name,
+  description,
+}) => {
+  return (
+    <div className={styles.overviewSection}>
+      <h3 className={styles.name}>{name}</h3>
+      <p className={styles.description}>{description}</p>
     </div>
   )
 }
@@ -32,8 +67,10 @@ interface IFeatureProps {
 const Feature: React.FC<IFeatureProps> = ({ description }) => {
   return (
     <li className={styles.feature}>
-      <img src={Checkmark} alt={'checkmark'} />
-      <span>{description}</span>
+      <span>
+        <img src={Checkmark} alt={'checkmark'} />
+      </span>
+      <span className={styles.featureDescription}>{description}</span>
     </li>
   )
 }
@@ -44,7 +81,7 @@ interface IFeaturesSectionProps {
 
 const FeaturesSection: React.FC<IFeaturesSectionProps> = ({ features }) => {
   return (
-    <div className={styles.features}>
+    <div className={styles.featuresSection}>
       <h4 className={styles.featureHeader}>{FEATURE_HEADER}</h4>
       <ul className={styles.featureList}>
         {features.map((feature, idx) => (
@@ -67,7 +104,7 @@ const PriceSection: React.FC<IPriceSectionProps> = ({
   nonSalePrice,
 }) => {
   return (
-    <div>
+    <div className={styles.priceSection}>
       <span className={styles.price}>{priceDisplay(price)}</span>
       {nonSalePrice && (
         <span className={styles.nonSalePrice}>
@@ -109,12 +146,9 @@ export const Product: React.FC<IProductProps> = ({
   recommendation,
 }) => {
   return (
-    <div>
-      {recommendation && (
-        <RecommendationBanner recommendation={recommendation} />
-      )}
-      <h3 className={styles.name}>{name}</h3>
-      <p className={styles.description}>{description}</p>
+    <div className={isFeatured ? styles.featuredProduct : styles.product}>
+      <RecommendationSection recommendation={recommendation} />
+      <OverviewSection name={name} description={description} />
       <FeaturesSection features={features} />
       <PriceSection
         isFeatured={isFeatured}
