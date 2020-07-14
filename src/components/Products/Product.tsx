@@ -6,6 +6,7 @@ import {
   MONEY_BACK_GUARANTEE,
   priceDisplay,
 } from './copy'
+import styles from './Product.module.css'
 import Checkmark from '../../assets/checkmark.svg'
 import Heart from '../../assets/heart.svg'
 
@@ -17,10 +18,10 @@ const RecommendationBanner: React.FC<IRecommendationBannerProps> = ({
   recommendation,
 }) => {
   return (
-    <>
+    <div className={styles.recommendation}>
       <img src={Heart} alt={'heart'} />
       {recommendation}
-    </>
+    </div>
   )
 }
 
@@ -30,10 +31,61 @@ interface IFeatureProps {
 
 const Feature: React.FC<IFeatureProps> = ({ description }) => {
   return (
-    <li>
+    <li className={styles.feature}>
       <img src={Checkmark} alt={'checkmark'} />
       <span>{description}</span>
     </li>
+  )
+}
+
+interface IFeaturesSectionProps {
+  features: string[]
+}
+
+const FeaturesSection: React.FC<IFeaturesSectionProps> = ({ features }) => {
+  return (
+    <div className={styles.features}>
+      <h4 className={styles.featureHeader}>{FEATURE_HEADER}</h4>
+      <ul className={styles.featureList}>
+        {features.map((feature, idx) => (
+          <Feature key={idx} description={feature} />
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+interface IPriceSectionProps {
+  isFeatured: boolean
+  price: number
+  nonSalePrice?: number
+}
+
+const PriceSection: React.FC<IPriceSectionProps> = ({
+  isFeatured,
+  price,
+  nonSalePrice,
+}) => {
+  return (
+    <div>
+      <span className={styles.price}>{priceDisplay(price)}</span>
+      {nonSalePrice && (
+        <span className={styles.nonSalePrice}>
+          {priceDisplay(nonSalePrice)}
+        </span>
+      )}
+      <button
+        type="button"
+        className={isFeatured ? styles.featuredConfirmCTA : styles.confirmCTA}
+      >
+        {CONFIRM_CTA}
+      </button>
+      {price ? (
+        <span className={styles.moneyBackGuarantee}>
+          {MONEY_BACK_GUARANTEE}
+        </span>
+      ) : null}
+    </div>
   )
 }
 
@@ -61,18 +113,14 @@ export const Product: React.FC<IProductProps> = ({
       {recommendation && (
         <RecommendationBanner recommendation={recommendation} />
       )}
-      <h3>{name}</h3>
-      <p>{description}</p>
-      <h4>{FEATURE_HEADER}</h4>
-      <ul>
-        {features.map((feature, idx) => (
-          <Feature key={idx} description={feature} />
-        ))}
-      </ul>
-      {priceDisplay(price)}
-      {nonSalePrice && priceDisplay(nonSalePrice)}
-      <button>{CONFIRM_CTA}</button>
-      {price ? MONEY_BACK_GUARANTEE : null}
+      <h3 className={styles.name}>{name}</h3>
+      <p className={styles.description}>{description}</p>
+      <FeaturesSection features={features} />
+      <PriceSection
+        isFeatured={isFeatured}
+        price={price}
+        nonSalePrice={nonSalePrice}
+      />
     </div>
   )
 }

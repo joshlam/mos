@@ -1,0 +1,73 @@
+.name {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.description {}
+
+.label {
+    color: #9D9D9D;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.features {
+    border-bottom: 1px solid #DBDBDB;
+    border-top: 1px solid #DBDBDB;
+}
+
+.featureHeader {
+    composes: label;
+}
+
+.featureList {
+    list-style: none;
+    padding: 0;
+}
+
+.feature {
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.nonSalePrice {
+    composes: price;
+    color: #c0c0c0;
+    text-decoration: line-through;
+}
+
+.button {
+    border-radius: 4px;
+    border-style: none;
+    color: #FFFFFF;
+    display: block;
+    font-size: 16px;
+}
+
+.confirmCTA {
+    composes: button;
+    background-color: #232323;
+    border-color: #232323;
+}
+
+.featuredConfirmCTA {
+    composes: button;
+    background-color: #3BA3F6;
+    border-color: #3BA3F6;
+}
+
+.moneyBackGuarantee {
+    composes: label;
+    display: block;
+}
+
+.recommendation {
+    color: #000000;
+    background-color: #FEEA52;
+    border-radius: 40px;
+    font-size: 14px;
+}
