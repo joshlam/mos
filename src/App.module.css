@@ -5,6 +5,13 @@
   padding-top: 1.5rem;
 }
 
+@media (max-width: 840px) {
+  .app {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 .header {}
 
 .logo {}

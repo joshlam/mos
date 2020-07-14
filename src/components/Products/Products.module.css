@@ -1,3 +1,10 @@
 .products {
     display: flex;
 }
+
+@media (max-width: 840px) {
+    .products {
+        flex-wrap: nowrap;
+        overflow: auto;
+    }
+}
